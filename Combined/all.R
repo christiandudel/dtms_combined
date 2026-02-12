@@ -432,8 +432,8 @@ dtms_backward <- function(data,
 #' In case the parametric bootstrap is used the argument `weights` is used to
 #' specify the name of the variable with the weights.
 #'
-#' For parallel computing the packages `foreach` and `doParallel` (and their
-#' dependcies are used). See the documentation of these packages for details.
+#' For parallel computing the packages `foreach` and `doParallel`
+#' are used. See the documentation of these packages for details.
 #'
 #' @param data Data frame in transition format as created with \code{dtms_format}.
 #' @param dtms dtms object, as created with \code{dtms}.
@@ -1136,7 +1136,7 @@ dtms_clean <- function(data,
 #' @param dtms dtms object, as created with \code{dtms}.
 #' @param fromvar Character (optional), name of variable in `data` with starting state. Default is "from".
 #' @param tovar Character (optional), name of variable  in `data`with receiving state. Default is "to".
-#' @param weights Character (optional), name of variablein `data` with weights. Default is NULL.
+#' @param weights Character (optional), name of variable in `data` with weights. Default is NULL.
 #'
 #' @return A data frame
 #' @export
@@ -1244,7 +1244,7 @@ dtms_data_summary <- function(data,
 #' are included These are always including lower lags; e.g., a model including
 #' the state at t-3 also has the state at t-2, at t-1, and at t. All resulting
 #' models are compared to a model which does not control for the current or any
-#' past state. If `lags=NULL` the Markov model is comapred to this model not
+#' past state. If `lags=NULL` the Markov model is compared to this model not
 #' accounting for the current state or any past states.
 #'
 #' The argument `keepNA` controls how missing values are handled. These will
@@ -2284,7 +2284,7 @@ dtms_fit <- function(data,
 #'
 #' @seealso
 #' \code{\link{dtms_data_summary}} to summarize data in transition format.
-#' \code{\link{dtms_censoring}} for descriptives on censoring.
+#' \code{\link{dtms_censoring}} for descriptive information on censoring.
 #' \code{\link{dtms_clean}} for fast data cleaning.
 #'
 #' @examples
@@ -3223,7 +3223,7 @@ dtms_last <- function(probs=NULL,
 #' Creates a transition matrix from transition probabilities
 #'
 #' @description
-#' This function creates a transiton matrix based on transition probabilities
+#' This function creates a transition matrix based on transition probabilities
 #' predicted using the function `dtms_transitions`.
 #'
 #' @param probs Data frame with transition probabilities, as created with \code{dtms_transitions}.
@@ -3399,8 +3399,8 @@ plot.dtms_probs <- function(x,...) {
 #' Nonparametric estimates of transition probabilities
 #'
 #' @description
-#' This function calculates nonparametric estimates of transition probabilities.
-#' Standard errors assume that all observations are independent.
+#' This function calculates nonparametric estimates of transition probabilities
+#' for each value of the time scale.
 #'
 #' @details
 #' The argument `data` takes a data set in transition format. Predicted
@@ -3546,7 +3546,7 @@ dtms_nonparametric <- function(data,
 #' of the states.
 #'
 #' @details
-#' Counting starts with 1 and the first occurrence iof a state. For instance,
+#' Counting starts with 1 and the first occurrence of a state. For instance,
 #' if for an unit the sequence of states A, A, A, B, B, A, C is observed,
 #' the occurrence variable would include 1, 1, 1, 1, 1, 2, 1.
 #'
@@ -3904,7 +3904,7 @@ dtms_reward <- function(probs=NULL,
 #' \code{dtms_reward}.
 #'
 #' @param dtms dtms object, as created with \code{dtms}.
-#' @param starting Character (optional), name or names of starting states. If NULL (default) any transition to the state or states specififed with \code{receiving} will get the reward.
+#' @param starting Character (optional), name or names of starting states. If NULL (default) any transition to the state or states specified with \code{receiving} will get the reward.
 #' @param receiving Character, name or names of states to which transitioning generates the reward. Can be both transient or absorbing states.
 #' @param reward Numeric, reward value to be placed in matrix.
 #' @param start_time Numeric (optional), value of time scale for start. If NULL (default) first value of time scale will be used.
@@ -4286,9 +4286,9 @@ dtms_simulate <- function(probs=NULL,
 #'
 #' @source User Matthew Plourde on Stackoverflow https://stackoverflow.com/questions/12214963/source-only-part-of-a-file
 #'
-#' @param file Name of the file to read (character)
-#' @param start First line to read (numeric)
-#' @param end Last line to read (numeric)
+#' @param file Name of the file to read (character).
+#' @param start First line to read (numeric).
+#' @param end Last line to read (numeric).
 #' @param local Logical or an environment. Default is 'FALSE'. See function \code{source} for details.
 #'
 #' @seealso [func(source)]
@@ -4297,8 +4297,14 @@ dtms_simulate <- function(probs=NULL,
 #'
 dtms_source <- function(file,start,end,local=FALSE) {
 
-  file.lines <- scan(file=file, what=character(), skip=start-1, nlines=end-start+1, sep='\n')
+  file.lines <- scan(file=file,
+                     what=character(),
+                     skip=start-1,
+                     nlines=end-start+1,
+                     sep='\n')
+
   file.lines.collapsed <- paste(file.lines, collapse='\n')
+
   source(textConnection(file.lines.collapsed), local=local)
 
 }
